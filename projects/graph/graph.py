@@ -102,18 +102,49 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        visited = set()
+        q = Queue()
+        q.enqueue([starting_vertex])
+        
+        while q.size() > 0:
+            path = q.dequeue()
+            vertex = path[-1]
+           
+            if vertex == destination_vertex:
+                return path
+            
+            if vertex not in visited:
+                visited.add(vertex)
+                
+                for next_vert in self.vertices[vertex]:
+                    path_copy = list(path)
+                    path_copy.append(next_vert)
+                    q.enqueue(path_copy)
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        visited = set()
+        s = Stack()
+        s.push([starting_vertex])
 
+        while s.size() > 0:
+            path = s.pop()
+            vertex = path[-1]
 
+            if vertex == destination_vertex:
+                return path
+        
+            if vertex not in visited:
+                visited.add(vertex)
 
-
+                for next_vert in self.vertices[vertex]:
+                    path_copy = list(path)
+                    path_copy.append(next_vert)
+                    s.push(path_copy)
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
